@@ -1,0 +1,24 @@
+{ "columns":23,
+ "image":"Assets.png",
+ "imageheight":224,
+ "imagewidth":368,
+ "margin":0,
+ "name":"Assets",
+ "spacing":0,
+ "terrains":[
+        {
+         "name":"New Terrain",
+         "tile":174
+        }],
+ "tilecount":322,
+ "tiledversion":"1.4.2",
+ "tileheight":16,
+ "tiles":[
+        {
+         "id":134,
+         "terrain":[-1, -1, 0, -1]
+        }],
+ "tilewidth":16,
+ "type":"tileset",
+ "version":1.4
+}
