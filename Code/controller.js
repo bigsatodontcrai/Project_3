@@ -5,44 +5,41 @@ class controller {
         this.vert = sprite.y;
         this.vx = 0;
         this.vy = 0;
+        this.curr = [];
+        this.size = 0;
         //this.time = 0;
     }
 
     movement (e) {
-        
+        this.curr.push(e.key);
+        this.size++;
         if(e.key == 'a'){
             this.vx = -3;
-            return false;
         } if (e.key == 'd'){
             this.vx = 3;
-            return false;
         } if (e.key == 'w'){
-            if (this.sprite.y > 160 - 100)
+            if (this.sprite.y < this.vert - 100)
             {
                 console.log('WHATUP');
-                this.vy = -4;
+                this.vy = 3;
                 return false;
             } 
-            return true;
+            this.vy = -3;
         } 
         return true;
-        //this.time = amount;
-        
-
          
     }
 
     move(){
         this.sprite.x += this.vx;
+        this.sprite.y += this.vy;
         
-        if (this.sprite.y > 160 - 100) {
-            this.sprite.y += this.vy
-        } else if (this.sprite.y == 160 - 100) {
-            this.sprite.y += this.vy;
-        } if (this.sprite.y == 160) {
-            this.vy = 0;
-        }
         return true;
+    }
+
+    calculateParameters(){
+        this.hori = this.sprite.x;
+        this.vert = this.sprite.x;
     }
 
     moveLeft(){
@@ -56,25 +53,40 @@ class controller {
         return true;
     }
 
-//in 6 frames, i want him to go y = y + 24 meaning each frame he goes up 24/6
-//meaning every frame, he goes up 4. his velocity is thus 4 px/frame
-/*
+    stopMovement(e, spriteHurtBox){
+        if (e.key == 'd' || e.key == 'a') {
+            if (spriteHurtBox.downCollision == true) {
+                this.vx = 0;
+            }
+        } if (e.key == 'w'){
+            this.vy = 6;
+            
+        }
+        
+        else if (spriteHurtBox.downCollision == false) {
+            this.vy = 6;
 
-frame 1: 4 px
-frame 2: 8 px
-frame 3: 12 px
-frame 4: 16 px
-frame 5: 20 px
-frame 6: 24 px
+        } else if (spriteHurtBox.downCollision == true) {
+            this.vy = 0;
+        }
+    }
 
-the time each frame takes = 1 / 60 seconds
-
-After 6 frames, i want him to fall down to the ground from gravity
-in 6 frames going backwards from 24 down to 0. 
-meaning his velocity is then -4 px/frame
-
-
-
-*/
+    clearList(){
+        this.curr = [];
+    }
 }
+
+function keypress(e) {
+    controller.keyP(e);
+}
+
+function keydown(e) {
+
+}
+
+function keyup(e) {
+
+}
+
+
 
