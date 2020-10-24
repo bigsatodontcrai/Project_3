@@ -21,17 +21,21 @@ class hurtBox {
     calculateEdges(){
         this.rightEdge = this.sprite.x + this.sprite.width;
         this.leftEdge = this.sprite.x;
-        this.topEdge = this.sprite.y - this.sprite.height;
-        this.bottomEdge = this.sprite.y;
+        this.topEdge = this.sprite.y;
+        this.bottomEdge = this.sprite.y + this.sprite.height;
+        
         //hurtbox is updated every frame for the character while it's constant
         //for the other objects
     }
 
     calculateCharEdges(){
-        this.rightEdge = this.sprite.x + 2 * this.sprite.width/3;
-        this.leftEdge = this.sprite.x + this.sprite.width/3;
-        this.topEdge = this.sprite.y - 16*3;
-        this.bottomEdge = this.sprite.y - 16;
+        this.rightEdge = this.sprite.x + 0.66 * sprite.width;
+        this.leftEdge = this.sprite.x + 0.26 * sprite.width;
+        this.topEdge = this.sprite.y + 0.16 * sprite.height;
+        this.bottomEdge = this.sprite.y + 0.97 * sprite.height;
+
+        this.width = this.rightEdge - this.leftEdge;
+        this.height = this.topEdge - this.bottomEdge;
 
         console.log(this.topEdge);
         console.log(this.bottomEdge);
@@ -45,8 +49,9 @@ class hurtBox {
     }
 
     updateHurtBox(controller){
-        this.calculateCharEdges();
         this.updateVelocity(controller);
+        this.calculateCharEdges();
+        
     }
 
     updateCollisionStatements(box){
@@ -55,17 +60,22 @@ class hurtBox {
         let updatedYT = this.topEdge + this.vy;
         let updatedYD = this.bottomEdge + this.vy;
 
+        let RC = false;
+        let LC = false;
+        let UC = false;
+        let DC = false;
+        
+        
+        RC = updatedXR > box.leftEdge && updatedXR < box.rightEdge;
+        LC = updatedXL < box.rightEdge && updatedXL > box.leftEdge;
+        UC = updatedYT < box.bottomEdge && updatedYT > box.topEdge;
+        DC = updatedYD > box.topEdge && updatedYD < box.bottomEdge;
         
 
-        let RC = updatedXR > box.leftEdge && updatedXR < box.rightEdge;
-        let LC = updatedXL < box.rightEdge && updatedXR > box.leftEdge;
-        let UC = updatedYT < box.bottomEdge && updatedYT > box.topEdge;
-        let DC = updatedYD > box.topEdge && updatedYD < box.bottomEdge;
-
-        this.rightCollision = RC && box != 0;
-        this.leftCollision = LC && box != 0;
-        this.upCollision = UC && box != 0;
-        this.downCollision = DC && box != 0;
+        this.rightCollision = RC;
+        this.leftCollision = LC;
+        this.upCollision = UC;
+        this.downCollision = DC;
     }
 
     isCollide(){
@@ -78,11 +88,16 @@ class hurtBox {
             controller.vx = 0;
         }
         if(this.leftCollision && Forward == -1){
+            
             controller.vx = 0;
         }
+        
         if(this.upCollision){
-            controller.vy = 6;
-        } if (this.downCollision){
+            console.log('UP');
+            controller.vy = 3;
+        } 
+        if (this.downCollision) {
+            console.log('DOWN');
             controller.vy = 0;
         }
         return this.isCollide();

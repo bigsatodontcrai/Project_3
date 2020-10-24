@@ -10,7 +10,7 @@ class controller {
         //this.time = 0;
     }
 
-    movement (e) {
+    movement (e, spriteHurtBox) {
         this.curr.push(e.key);
         this.size++;
         if(e.key == 'a'){
@@ -18,13 +18,11 @@ class controller {
         } if (e.key == 'd'){
             this.vx = 3;
         } if (e.key == 'w'){
-            if (this.sprite.y < this.vert - 100)
-            {
-                console.log('WHATUP');
+            if(spriteHurtBox.downCollision){
+                this.vy = -3;
+            } else {
                 this.vy = 3;
-                return false;
-            } 
-            this.vy = -3;
+            }
         } 
         return true;
          

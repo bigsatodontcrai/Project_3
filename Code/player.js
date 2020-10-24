@@ -5,22 +5,21 @@ function setupCharacter(){
 
     sprite = sprite;
 
-    sprite.height = 32;
-    sprite.width = 16 * 4;
-    sprite.x = -16;
-    sprite.y = 176;
+    sprite.height = 39.5;
+    sprite.width = 40;
+    sprite.x = 16;
+    sprite.y = 192 - 16*5;
     sprite.play();
     sprite.animationSpeed = 0.1;
 
     spriteHurtBox = new hurtBox(sprite);
-
     gameController = new controller(sprite);
 
 }
 
 
 function characterMovement(){
-    
+
         let thing = false;
         if (state != 'jumping') {
             gameController.vy = 3;
@@ -28,21 +27,38 @@ function characterMovement(){
         spriteHurtBox.updateHurtBox(gameController);
         arrayOfSprites = newSpriteArray(spriteHurtBox);
         console.log(spriteHurtBox);
-
+        console.log(arrayOfSprites);
+        console.log(sprite.y);
+        
         for (let i = 0; i < 8; i++) {
 
             if (arrayOfSprites[i] == 0) {
-                console.log('haha');
+                if(i == 0||1){
+                    spriteHurtBox.upCollision = false;
+                } else if(i == 2||3){
+                    spriteHurtBox.rightCollision = false;
+                } else if (i == 4||5){
+                    spriteHurtBox.downCollision = false;
+                } else if (i == 6||7){
+                    spriteHurtBox.leftCollision = false;
+                }
             }
             else {
                 console.log('sup');
-                thing = spriteHurtBox.collide(arrayOfSprites[i], gameController, Forward);
-                console.log(arrayOfSprites[i]);
+                try {
+                    thing = spriteHurtBox.collide(arrayOfSprites[i], gameController, Forward);
+                } catch(error){
+                    alert('you died.');
+                    sprite.x = -16;
+                    sprite.y = 140;
+                    sprite.animationSpeed = 0.1;
+                }
                 console.log(thing);
             }
         }
         gameController.move();
-
+        console.log(gameController.vx);
+        console.log(gameController.vy);
         console.log(Forward);
 
         
@@ -52,10 +68,6 @@ function characterMovement(){
 function playCharacter(){
     const newResource = PIXI.Loader.shared.resources['./Assets/adventurer-Sheet.json'];
     setupCharacter();
-    
-    //gameController.vy = 6;
-    let isRun = false;
-    let isKeyDown = false;
 
     document.addEventListener('keydown', (e) => {
 
@@ -66,7 +78,7 @@ function playCharacter(){
 
         //gameController.keyP(e);
         isKeyDown = true;
-        gameController.movement(e);
+        gameController.movement(e, spriteHurtBox);
         state = updateState(gameController.vx, gameController.vy, sprite);
         let currentTextures = newResource.spritesheet.animations[state];
         if (sprite.textures != currentTextures) {
@@ -82,11 +94,9 @@ function playCharacter(){
         sprite.textures = newResource.spritesheet.animations[state];
         sprite.play();
 
-
     });
 
-
-
+    
     sprite.onFrameChange = function () {
         characterMovement();
         state = updateState(gameController.vx, gameController.vy, sprite);
@@ -96,5 +106,9 @@ function playCharacter(){
             sprite.play();
         }
     }
+    
+
+
+    
 }
 

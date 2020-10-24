@@ -1,3 +1,7 @@
+
+PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
+
+
 document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(app.view);
 
@@ -24,6 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 platformSprites[i].y = (yloc + 1) * 16;
                 platformSprites[i].width = 16;
                 platformSprites[i].height = 16;
+                platformSprites[i].interactive = true;
+
                 constantHurtBox[i] = new hurtBox(platformSprites[i]);
                 constantHurtBox[i].calculateEdges();
                 container.addChild(platformSprites[i]);
@@ -32,6 +38,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 constantHurtBox[i] = 0;
             }
         }
+
+        console.log(platformSprites);
+        console.log(constantHurtBox);
         
     });
 
