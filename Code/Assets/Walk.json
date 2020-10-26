@@ -1,0 +1,10 @@
+{"frames":{"Walk0.png":{"frame":{"x":0,"y":0,"w":150,"h":150},"rotated":false,"trimmed":false,"spriteSourceSize":{"x":0,"y":0,"w":150,"h":150},"sourceSize":{"w":150,"h":150}},"Walk1.png":{"frame":{"x":150,"y":0,"w":150,"h":150},"rotated":false,"trimmed":false,"spriteSourceSize":{"x":0,"y":0,"w":150,"h":150},"sourceSize":{"w":150,"h":150}},"Walk2.png":{"frame":{"x":0,"y":150,"w":150,"h":150},"rotated":false,"trimmed":false,"spriteSourceSize":{"x":0,"y":0,"w":150,"h":150},"sourceSize":{"w":150,"h":150}},"Walk3.png":{"frame":{"x":150,"y":150,"w":150,"h":150},"rotated":false,"trimmed":false,"spriteSourceSize":{"x":0,"y":0,"w":150,"h":150},"sourceSize":{"w":150,"h":150}}},
+"animations": {
+    "walk": [
+        "Walk0.png",
+        "Walk1.png",
+        "Walk2.png",
+        "Walk3.png"
+    ]
+},
+"meta":{"app":"https://github.com/piskelapp/piskel/","version":"1.0","image":"Walk.png","format":"RGBA8888","size":{"w":300,"h":300}}}
