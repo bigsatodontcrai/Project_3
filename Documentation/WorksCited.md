@@ -8,3 +8,8 @@ This is our works cited page for Project 3
     * https://youtu.be/_HjQTzpbRK4
     * [This](https://medium.com/javascript-in-plain-english/platform-game-with-pixijs-part-3-a44c873e895b) helped us with our collision
 * [JSDoc](https://jsdoc.app/)
+* We got our animations from the following link
+    * https://luizmelo.itch.io/monsters-creatures-fantasy
+    * https://rvros.itch.io/animated-pixel-hero
+    * https://startledpixels.itch.io/2d-pixel-item-asset-pack
+    
